@@ -19,5 +19,21 @@ document.getElementById("saveBtn").addEventListener("click", () => {
   });
 
   // send message so that content.js updates immediately when popup changes
-  chrome.runtime.sendMessage({ action: "modesUpdated", modes: selected });
+  chrome.tabs.query(
+    {
+      active: true,
+      currentWindow: true,
+      url: "https://www.youtube.com/*",
+    },
+    (tabs) => {
+      if (tabs.length > 0) {
+        chrome.tabs.sendMessage(tabs[0].id, {
+          action: "modesUpdated",
+          modes: selected,
+        });
+      } else {
+        console.log("Youtube not oopenedd");
+      }
+    }
+  );
 });
