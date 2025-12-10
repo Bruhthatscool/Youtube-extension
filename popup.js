@@ -18,5 +18,6 @@ document.getElementById("saveBtn").addEventListener("click", () => {
     console.log("saved modes : ", selected);
   });
 
-  chrome.runtime.sendMessage({ action: "modesUpdated" });
+  // send message so that content.js updates immediately when popup changes
+  chrome.runtime.sendMessage({ action: "modesUpdated", modes: selected });
 });
