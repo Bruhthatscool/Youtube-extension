@@ -17,4 +17,6 @@ document.getElementById("saveBtn").addEventListener("click", () => {
   chrome.storage.local.set({ modes: selected }, () => {
     console.log("saved modes : ", selected);
   });
+
+  chrome.runtime.sendMessage({ action: "modesUpdated" });
 });
